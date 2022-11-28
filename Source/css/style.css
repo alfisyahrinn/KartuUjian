@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+* {
+  font-family: 'Poppins', sans-serif;
+}
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+/* Sidebar Left*/
+ul,
+li {
+  text-decoration: none;
+  list-style-type: none;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  list-style-type: none;
+  list-style: none;
+}
+body {
+  background-color: #f8f9fd;
+}
+
+.left {
+  background-color: #f8f9fd;
+  height: 100vh;
+  width: 20%;
+}
+
+.sidebar-judul {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #828ea5;
+}
+
+.sidebar-isi {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #828ea5;
+}
+
+.sidebar-isi:hover {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #3547ac;
+}
+img:hover {
+  color: #3547ac;
+}
+/* End Sidebar Left*/
+
+/* Content Right */
+.right {
+  background-color: #fff;
+  height: 100vh;
+  width: 80%;
+  border-radius: 50px 0 0 0;
+  /* padding-left: 73px; */
+  padding-top: 44px;
+}
+
+.akun-h5 {
+  font-weight: 600;
+  font-size: 18px;
+  color: #000000;
+  margin-bottom: 0;
+}
+.akun {
+  margin-bottom: 60px;
+}
+
+.card {
+  color: red;
+  width: 307px;
+  height: 170px;
+  background: #fdf8fc;
+  border-radius: 30px;
+  display: flex;
+}
+.card h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  color: #8b4073;
+}
+.card p {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  color: #c060a1;
+}
+.card {
+  margin-right: 73px;
+}
+
+/* End Content Right */

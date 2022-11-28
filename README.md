@@ -1,6 +1,6 @@
 # KartuUjian
- @Kelompok
- Nama = Okok
- Selegan  = Mantap Mantap
- Anggota  = - Alfi Syahrin
-            - Riski Saputra Salam
+
+@Kelompok
+Nama = Okok
+Selegan = Mantap Mantap
+Anggota = - Alfi Syahrin - Riski Saputra Salam
