@@ -102,3 +102,12 @@ img:hover {
 }
 
 /* End Content Right */
+
+/* Color class */
+.text {
+  color: #828ea5;
+}
+
+.text-active {
+  color: #c060a1;
+}

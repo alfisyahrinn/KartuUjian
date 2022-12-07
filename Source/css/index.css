@@ -65,3 +65,11 @@ img:hover {
   border-radius: 30px;
 }
 /* End Content Right */
+
+.text {
+  color: #828ea5;
+}
+
+.text-active {
+  color: #c060a1;
+}
