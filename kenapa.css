@@ -1,0 +1,32 @@
+.text {
+  color: #828ea5;
+}
+
+.text-active {
+  color: #c060a1;
+  font-weight: 700;
+}
+
+.text-active:hover {
+  color: #c060a1;
+}
+
+.text:hover {
+  color: #c060a1;
+}
+
+.sidebar {
+  background-color: #f8f9fd;
+}
+
+#babi {
+  background-color: aqua;
+}
+
+.content {
+  border-radius: 100px;
+}
+
+h5 {
+  color: red;
+}
