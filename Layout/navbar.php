@@ -5,13 +5,20 @@
         <?= $_SESSION["username"]; ?>
       </a>
       <ul class="dropdown-menu dropdown-menu-gray">
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> 
+                Profile
+            </a>
+        </li>
         <li>
-                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                data-bs-target="#ModalUbahPassword">
-                <i class="bi bi-key-fill"></i> Ubah Password</a>
-              </li>
-        <li><a class="dropdown-item" href="proses/logout.php">Logout</a></li>
+            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+            data-bs-target="#ModalUbahPassword">
+            <i class="bi bi-key-fill"></i> 
+                Ubah Password
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="proses/logout.php"><i class="bi bi-box-arrow-in-left"></i>
+                Logout</a></li>
       </ul>
     </li>
   </ul>
@@ -32,7 +39,7 @@
             <div class="col-lg-6">
               <div class="form-floating mb-3">
                 <input disabled type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                  name="username" required value="<?php echo $_SESSION['username_decafe'] ?>">
+                  name="username" required value="<?php echo $_SESSION['username'] ?>">
                 <label for="floatingInput">Username</label>
                 <div class="invalid-feedback">
                   Masukkan Username
