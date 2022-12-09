@@ -9,6 +9,9 @@ if (isset($_GET["halaman"]) && $_GET["halaman"] == "home") {
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "user") {
   $page = "user.php";
   include 'main.php';
+} elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "persyaratan") {
+  $page = "persyaratan.php";
+  include 'main.php';
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "login") {
   include 'login.php';
 } else {
