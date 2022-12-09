@@ -1,8 +1,13 @@
 <?php
 session_start();
 if (isset($_GET["halaman"]) && $_GET["halaman"] == "home") {
-  $page = "home.php";
-  include 'main.php';
+  if ($_SESSION["level"] == 1 || $_SESSION["level"] == 2) {
+    $page = "home.php";
+    include 'main.php';
+  } else {
+    $page = "biodata.php";
+    include 'main.php';
+  }
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "data") {
   if ($_SESSION["level"] == 1 || $_SESSION["level"] == 2) {
     $page = "data.php";
