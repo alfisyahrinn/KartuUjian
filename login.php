@@ -1,7 +1,52 @@
 <?php
 // session_start();
-if (!empty($_SESSION["usernameDecafe"])) {
+require "proses/koneksi.php";
+if (!empty($_SESSION["username"])) {
   header('location:home');
+}
+
+
+if (isset($_POST["login"])) {
+  //ambil dari form
+  $username = htmlentities($_POST["username"]);
+  $password = md5(htmlentities($_POST["password"]));
+
+  //query
+  $hasil = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username' && password =  '$password';");
+  $result = mysqli_fetch_assoc($hasil);
+  if ($result) {
+    $_SESSION["username"] = $username;
+    $_SESSION["level"] = $result["level"];
+    echo "
+  <script>
+  document.location='home'
+  </script>
+  ";
+    header('location:home');
+  } else {
+    echo "
+  <script>
+  alert('useraname atau password salah')
+  document.location='login.php'
+  </script>
+  ";
+  }
+  // exit();
+
+  // if ($username == "" && $password == "") {
+  //   echo "emal ps kosong";
+  // } else if ($username == $usernameDB && $password == $passwordDB) {
+  //   $_SESSION["username2b"] = $username;
+  //   header("Location: index.php?url=index");
+  // } else {
+  //   // header("Location: 1formlogin.php");
+  //   echo "
+  // <script>
+  // alert('Username salah');
+  // document.location='1formlogin.php';
+  // </script>
+  // ";
+  // }
 }
 ?>
 <!DOCTYPE html>
@@ -43,7 +88,7 @@ if (!empty($_SESSION["usernameDecafe"])) {
     }
   </style>
   <div class="ini">
-    <form action="proses/prosesLogin.php" method="post">
+    <form action="" method="post">
       <ul>
         <li>
           <label class="form-label">

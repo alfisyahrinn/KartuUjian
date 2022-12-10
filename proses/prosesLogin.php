@@ -1,6 +1,6 @@
-
-  <?php
+ <?php
   session_start();
+
   require 'koneksi.php';
 
   if (isset($_POST["login"])) {
@@ -19,6 +19,7 @@
     document.location='../home'
     </script>
     ";
+      header('location:../home');
     } else {
       echo "
     <script>
@@ -27,21 +28,21 @@
     </script>
     ";
     }
-    exit();
+    // exit();
 
-    if ($username == "" && $password == "") {
-      echo "emal ps kosong";
-    } else if ($username == $usernameDB && $password == $passwordDB) {
-      $_SESSION["username2b"] = $username;
-      header("Location: index.php?url=index");
-    } else {
-      // header("Location: 1formlogin.php");
-      echo "
-    <script>
-    alert('Username salah');
-    document.location='1formlogin.php';
-    </script>
-    ";
-    }
+    // if ($username == "" && $password == "") {
+    //   echo "emal ps kosong";
+    // } else if ($username == $usernameDB && $password == $passwordDB) {
+    //   $_SESSION["username2b"] = $username;
+    //   header("Location: index.php?url=index");
+    // } else {
+    //   // header("Location: 1formlogin.php");
+    //   echo "
+    // <script>
+    // alert('Username salah');
+    // document.location='1formlogin.php';
+    // </script>
+    // ";
+    // }
   }
   ?>
