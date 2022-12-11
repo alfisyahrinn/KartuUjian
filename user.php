@@ -29,13 +29,6 @@ while ($user =  mysqli_fetch_assoc($query)) {
                   </div>
                 </div>
                 <div class="form-floating mb-3 col-md-6">
-                  <input type="text" name="nama" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-                  <label class="ms-2" for="floatingInput">Nama</label>
-                  <div class="invalid-feedback">
-                    Nama belum Di masukkan
-                  </div>
-                </div>
-                <div class="form-floating mb-3 col-md-6">
                   <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                   <label class="ms-2" for="floatingInput">username</label>
                   <div class="invalid-feedback">
@@ -77,7 +70,6 @@ while ($user =  mysqli_fetch_assoc($query)) {
           <tr>
             <th scope="col">No</th>
             <th scope="col">Nim</th>
-            <th scope="col">Nama</th>
             <th scope="col">Username</th>
             <th scope="col">Level</th>
             <th scope="col">Aksi</th>
@@ -91,7 +83,6 @@ while ($user =  mysqli_fetch_assoc($query)) {
             <tr>
               <td><?= $no; ?></td>
               <td><?= $rows["nim"]; ?></td>
-              <td><?= $rows["nama"]; ?></td>
               <td><?= $rows["username"]; ?></td>
               <td><?= $rows["level"]; ?></td>
               <td class="d-flex">
@@ -113,13 +104,6 @@ while ($user =  mysqli_fetch_assoc($query)) {
                         <form action="proses/editData.php" method="post" class="needs-validation" novalidate>
                           <div class="row">
                             <input type="hidden" name="id" value="<?= $rows['id']; ?>">
-                            <div class="form-floating mb-3 col-md-6">
-                              <input type="text" name="nama" class="form-control" id="floatingInput" placeholder="name@example.com" required value="<?= $rows['nama']; ?>">
-                              <label class="ms-2" for="floatingInput">Nama</label>
-                              <div class="invalid-feedback">
-                                Nama belum Di masukkan
-                              </div>
-                            </div>
                             <div class="form-floating mb-3 col-md-6">
                               <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" required value="<?= $rows['username']; ?>" <?php echo ($rows['username'] == 'admin') ? 'readonly' : ''; ?>>
                               <label class="ms-2" for="floatingInput">username</label>

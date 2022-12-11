@@ -48,9 +48,9 @@ if (isset($_GET["halaman"]) && $_GET["halaman"] == "home") {
     $page = "home.php";
     include 'main.php';
   }
-} elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "uploadSyarat") {
+} elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "cetakKartu") {
   if ($_SESSION["level"] == 3) {
-    $page = "uploadSyarat.php";
+    $page = "cetakKartu.php";
     include 'main.php';
   } else {
     $page = "home.php";

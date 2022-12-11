@@ -4,6 +4,34 @@ $query = mysqli_query($koneksi, "SELECT * FROM persyaratan");
 while ($user =  mysqli_fetch_assoc($query)) {
   $row[] = $user;
 }
+
+//edit syarat
+if (isset($_POST["updateSyarat"])) {
+  $nim = htmlspecialchars($_POST["nim"]);
+  $status = htmlspecialchars($_POST["status"]);
+  $hadir = htmlspecialchars($_POST["hadir"]);
+
+  $result = mysqli_query($koneksi, "UPDATE persyaratan SET 
+                                  hadir='$hadir', 
+                                  status='$status'
+                                  WHERE  nim=$nim;");
+
+  if ($result) {
+    echo "
+    <script>
+    alert('Persyaratan berhasil di Update')
+    document.location='persyaratan'
+    </script>
+    ";
+  } else {
+    echo "
+    <script>
+    alert('Gagal Update Persyaratan')
+    document.location='persyaratan'
+    </script>
+    ";
+  }
+}
 ?>
 <div class="card">
 
@@ -20,6 +48,7 @@ while ($user =  mysqli_fetch_assoc($query)) {
             <th scope="col">Pembimbing</th>
             <th scope="col">Perpustakaan</th>
             <th scope="col">Hadir</th>
+            <th scope="col">Status</th>
             <th scope="col">Aksi</th>
           </tr>
         </thead>
@@ -30,10 +59,17 @@ while ($user =  mysqli_fetch_assoc($query)) {
           ?>
             <tr>
               <td><?= $rows["nim"]; ?></td>
-              <td><?= $rows["ukt"]; ?></td>
-              <td><?= $rows["pembimbing"]; ?></td>
-              <td><?= $rows["perpus"]; ?></td>
+              <td><img src="Source/img/<?= $rows["ukt"]; ?>" alt="" width="70"></td>
+              <td><img src="Source/img/<?= $rows["pembimbing"]; ?>" alt="" width="70"></td>
+              <td><img src="Source/img/<?= $rows["perpus"]; ?>" alt="" width="70"></td>
               <td><?= $rows["hadir"]; ?></td>
+              <td>
+                <?php if ($rows["status"] == 1) : ?>
+                  <p class="alert alert-success p-0 m-0 text-center">Setujui</p>
+                <?php else : ?>
+                  <p class="alert alert-danger p-0 m-0 text-center">Belum</p>
+                <?php endif ?>
+              </td>
               <td class="d-flex">
                 <!-- Modal Edit User -->
                 <button class="me-1 btn btn-warning" data-bs-toggle="modal" data-bs-target="#editData<?= $rows['nim']; ?>">
@@ -42,102 +78,66 @@ while ($user =  mysqli_fetch_assoc($query)) {
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                   </svg>
                 </button>
-                <!-- <div class="modal fade" id="editData<?= $rows['nim']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+                <div class="modal fade" id="editData<?= $rows['nim']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-xl modal-fullscreen-md-down">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Persyaratan</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form action="proses/editData.php" method="post" class="needs-validation" novalidate>
+                        <form action="" method="post" class="needs-validation" novalidate>
                           <div class="row">
-                            <input type="hidden" name="id" value="<?= $rows['nim']; ?>">
+                            <input type="hidden" name="nim" value="<?= $rows['nim']; ?>">
                             <div class="form-floating mb-3 col-md-6">
-                              <input type="text" name="nama" class="form-control" id="floatingInput" placeholder="name@example.com" required value="<?= $rows['nama']; ?>">
-                              <label class="ms-2" for="floatingInput">Nama</label>
-                              <div class="invalid-feedback">
-                                Nama belum Di masukkan
-                              </div>
-                            </div>
-                            <div class="form-floating mb-3 col-md-6">
-                              <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" required value="<?= $rows['username']; ?>" <?php echo ($rows['username'] == 'admin') ? 'readonly' : ''; ?>>
-                              <label class="ms-2" for="floatingInput">username</label>
-                              <div class="invalid-feedback">
-                                Username belum Di masukkan
-                              </div>
-                            </div>
-                            <div class="form-floating mb-3 col-md-12">
-                              <select class="form-select" id="mySelect" name="level" required>
+                              <select class="form-select" id="mySelect" name="status" required>
                                 <?php
-                                $data = array("admin", "petugas", "mahasiswa");
-                                foreach ($data as $key => $value) {
-                                  if ($rows["level"] == $key + 1) {
-                                    echo "<option selected value='$key'>$value</option>";
-                                  } else {
-                                    echo "<option value='$key'>$value</option>";
-                                  }
-                                }
+                                $data = array("Setujui", "Belum");
+                                foreach ($data as $key => $value) :
+                                  if ($rows["status"] == $key + 1) : ?>
+                                    <option selected value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php else : ?>
+                                    <option value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php endif ?>
+                                <?php endforeach ?>
                                 ?>
                               </select>
+                              <label class="ms-2" for="floatingInput">Status</label>
                               <div class="invalid-feedback">
                                 Level belum Di masukkan
                               </div>
                             </div>
+                            <div class="form-floating mb-3 col-md-6">
+                              <input type="text" name="hadir" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?= $rows["hadir"]; ?>">
+                              <label class="ms-2" for="floatingInput">Hadir</label>
+                              <div class="invalid-feedback">
+                                Hadir belum Di masukkan
+                              </div>
+                            </div>
+                            <div class="form-floating mb-3 col-md-4">
+                              <p class="ms-2 opacity-75" for="floatingInput">Ukt</p>
+                              <img src="Source/img/tes.png" alt="" width="360">
+                            </div>
+                            <div class="form-floating mb-3 col-md-4">
+                              <p class="ms-2 opacity-75" for="floatingInput">Pembimbing</p>
+                              <img src="Source/img/tes.png" alt="" width="360">
+                            </div>
+                            <div class="form-floating mb-3 col-md-4">
+                              <p class="ms-2 opacity-75" for="floatingInput">Perpustakaan</p>
+                              <img src="Source/img/tes.png" alt="" width="360">
+                            </div>
+
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" name="updateData" class="btn btn-primary">Update Data</button>
+                              <button type="submit" name="updateSyarat" class="btn btn-primary">Update Data</button>
                             </div>
                           </div>
                         </form>
                       </div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- End Modal Edit User -->
-
-                <button class="me-1 btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteKategori<?= $rows['nim']; ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                  </svg>
-                </button>
-
-                <!-- delete -->
-                <div class="modal fade" id="deleteKategori<?= $rows['nim']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-md modal-fullscreen-md-down">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Kategori</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="proses/deletePunyaData.php" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-                          <input type="hidden" name="nim" value="<?= $rows['nim']; ?>">
-                          <div class="row">
-                            <div class="form-floating mb-3 col-md-12 text-center">
-                              <?php if ($rows["nama"] == "admin") : ?>
-                                <div class="alert alert-warning" role="alert">
-                                  <b><?= $rows["nama"]; ?></b> Tidak dapat di <b>DELETE</b>
-                                </div>
-                              <?php else : ?>
-                                <div class="alert alert-danger" role="alert">
-                                  Yakin menghapus User <b><?= $rows["nama"]; ?> <br> Semua Data dan akun akan ke hapus</b>
-                                </div>
-                              <?php endif ?>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" <?php echo ($rows["nama"] == "admin") ? "hidden" : ""; ?> name="deleteData" class="btn btn-danger">Delete User</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-
                     </div>
                   </div>
                 </div>
-
+                <!-- End Modal Edit User -->
               </td>
             </tr>
           <?php $no++;
