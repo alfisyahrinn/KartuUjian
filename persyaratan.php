@@ -44,7 +44,6 @@ if (isset($_POST["updateSyarat"])) {
         <thead>
           <tr>
             <th scope="col">Nim</th>
-            <th scope="col">Nama</th>
             <th scope="col">Ukt</th>
             <th scope="col">Pembimbing</th>
             <th scope="col">Perpustakaan</th>

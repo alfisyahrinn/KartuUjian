@@ -49,43 +49,74 @@ CREATE TABLE IF NOT EXISTS `mahasiswa` (
   `prodi` varchar(50) DEFAULT NULL,
   `kelas` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`nim`)
-) ENGINE=InnoDB AUTO_INCREMENT=2021573010069 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2021573010100 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kartuujian.mahasiswa: ~5 rows (approximately)
+-- Dumping data for table kartuujian.mahasiswa: ~7 rows (approximately)
 /*!40000 ALTER TABLE `mahasiswa` DISABLE KEYS */;
 REPLACE INTO `mahasiswa` (`nim`, `nama`, `tempatLahir`, `tgl`, `jenisKelamin`, `nik`, `nohp`, `jurusan`, `prodi`, `kelas`) VALUES
-	(1, 'Amru', 'Lhokseumawe', '2003-10-22', 'L', '1104052210030011', '082110924022', 'TIK', 'TI', 'TI-2C'),
-	(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(5, 'Siti', 'Lhokseumawe', '2003-07-20', 'P', '1105022007030021', '082167318004', 'TIK', 'TI', 'TI-2A'),
-	(6, 'Dinda', 'Lhokseumawe', '2002-03-15', 'P', '1104051503020092', '082248901022', 'TIK', 'TI', 'TI-2A'),
+	(2021573010011, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2021573010015, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(2021573010042, 'Alfi Syahrin', 'Takengon', '2003-05-18', 'L', '1108021805030040', '089517201982', 'TIK', 'TI', 'TI-2B'),
+	(2021573010054, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(2021573010065, 'ahmad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(2021573010066, 'udin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2021573010068, 'Rizki Saputra Sarma', 'Krukuh', '2003-09-28', 'L', '1108022809030012', '085269971395', 'TIK', 'TI', 'TI-2B');
+	(2021573010068, 'Rizki Saputra Sarma', 'Krukuh', '2003-09-28', 'Pria', '1108022809030012', '085269971395', 'TIK', 'TI', 'TI-2B'),
+	(2021573010077, 'mahmud', 'takengon', '2022-12-14', 'Wanita', '111111111111111', '081537890909', 'Mesin', 'Las', 'M-3A'),
+	(2021573010088, 'Naruto Setan', 'Semarang', '2022-12-21', 'Wanita', '13223123', '081271275379', 'MEsin', 'las', 'M-2B');
 /*!40000 ALTER TABLE `mahasiswa` ENABLE KEYS */;
+
+-- Dumping structure for table kartuujian.persyaratan
+DROP TABLE IF EXISTS `persyaratan`;
+CREATE TABLE IF NOT EXISTS `persyaratan` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nim` bigint DEFAULT NULL,
+  `ukt` varchar(50) DEFAULT NULL,
+  `pembimbing` varchar(50) DEFAULT NULL,
+  `perpus` varchar(50) DEFAULT NULL,
+  `hadir` varchar(50) DEFAULT NULL,
+  `status` int DEFAULT '2',
+  PRIMARY KEY (`id`),
+  KEY `FK_persyaratan_mahasiswa` (`nim`),
+  CONSTRAINT `FK_persyaratan_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kartuujian.persyaratan: ~6 rows (approximately)
+/*!40000 ALTER TABLE `persyaratan` DISABLE KEYS */;
+REPLACE INTO `persyaratan` (`id`, `nim`, `ukt`, `pembimbing`, `perpus`, `hadir`, `status`) VALUES
+	(2, 2021573010065, NULL, NULL, NULL, '', 2),
+	(3, 2021573010042, 'tes.png', 'tes.png', 'tes.png', '100', 1),
+	(4, 2021573010068, NULL, NULL, NULL, NULL, 2),
+	(5, 2021573010088, NULL, NULL, NULL, NULL, 2),
+	(6, 2021573010011, NULL, NULL, NULL, NULL, 2),
+	(7, 2021573010015, NULL, NULL, NULL, NULL, 2),
+	(8, 2021573010054, NULL, NULL, NULL, NULL, 2),
+	(9, 2021573010077, NULL, NULL, NULL, '88', 2);
+/*!40000 ALTER TABLE `persyaratan` ENABLE KEYS */;
 
 -- Dumping structure for table kartuujian.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nim` bigint DEFAULT NULL,
-  `nama` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `username` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `password` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT '202cb962ac59075b964b07152d234b70',
   `level` int DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `FK_user_mahasiswa` (`nim`),
-  CONSTRAINT `FK_user_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_user_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table kartuujian.user: ~5 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-REPLACE INTO `user` (`id`, `nim`, `nama`, `username`, `password`, `level`) VALUES
-	(25, NULL, 'admin', 'admin', '202cb962ac59075b964b07152d234b70', 1),
-	(26, 2021573010042, 'alfi syahrin', 'sahrin', '202cb962ac59075b964b07152d234b70', 2),
-	(27, 2021573010068, 'riski saputra sarma', 'salam', '202cb962ac59075b964b07152d234b70', 2),
-	(28, NULL, 'petugas', 'petugas', '202cb962ac59075b964b07152d234b70', 3),
-	(29, NULL, 'kariyawan', 'kari', '202cb962ac59075b964b07152d234b70', 2);
+REPLACE INTO `user` (`id`, `nim`, `username`, `password`, `level`) VALUES
+	(25, NULL, 'admin', '202cb962ac59075b964b07152d234b70', 1),
+	(26, 2021573010042, 'sahrin', '202cb962ac59075b964b07152d234b70', 2),
+	(27, 2021573010068, 'salam', '202cb962ac59075b964b07152d234b70', 3),
+	(36, 2021573010088, 'hokage', '202cb962ac59075b964b07152d234b70', 3),
+	(37, NULL, 'abc', '202cb962ac59075b964b07152d234b70', 3),
+	(38, 2021573010015, 'Firman', '202cb962ac59075b964b07152d234b70', 3),
+	(39, 2021573010054, 'munawar iman', '202cb962ac59075b964b07152d234b70', 3),
+	(41, 2021573010077, 'mahmud', '202cb962ac59075b964b07152d234b70', 3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -65,7 +65,7 @@ while ($user =  mysqli_fetch_assoc($query)) {
       <!-- End Modal Tambah User -->
     </div>
     <div class="table-responsive">
-      <table id="table_d" class="table table-striped table-hover">
+      <table id="table_id" class="table table-striped table-hover">
         <thead>
           <tr>
             <th scope="col">No</th>
