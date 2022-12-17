@@ -2,26 +2,15 @@
 require 'koneksi.php';
 if (isset($_POST["updateData"])) {
   $id = $_POST["id"];
-  $nama = htmlspecialchars($_POST["nama"]);
   $username = htmlspecialchars($_POST["username"]);
   $level = htmlspecialchars($_POST["level"]);
+  $status = htmlspecialchars($_POST["status"]);
 
-  $query = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
-
-  if (mysqli_num_rows($query) > 0) {
-    echo "
-    <script>
-    alert('Username Telah Di gunakan')
-    document.location='../user'
-    </script>
-    ";
-    exit();
-  }
 
   $result = mysqli_query($koneksi, "UPDATE user SET 
-                                  nama='$nama', 
                                   username='$username', 
-                                  level=$level
+                                  level=$level,
+                                  status=$status
                                   WHERE  id=$id;");
 
   if ($result) {

@@ -13,6 +13,7 @@ if ($result) {
   $_SESSION["username"] = $username;
   $_SESSION["level"] = $result["level"];
   $_SESSION["nim"] = $result["nim"];
+  $_SESSION["status"] = $result["status"];
   echo "
     <script>
     document.location='../home'

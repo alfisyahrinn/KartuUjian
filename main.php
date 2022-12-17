@@ -14,6 +14,9 @@ if (empty($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kartu Ujian</title>
 
+  <!-- Logo Tittle -->
+  <link rel="icon" href="Source/img/icon/logo.png" type="image/x-icon">
+
   <!-- Java Script Data Table Jquery -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css" />
 

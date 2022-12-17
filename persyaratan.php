@@ -1,5 +1,5 @@
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM persyaratan");
+$query = mysqli_query($koneksi, "SELECT m.nama, p.* FROM persyaratan AS p INNER JOIN mahasiswa AS m ON m.nim = p.nim");
 
 while ($user =  mysqli_fetch_assoc($query)) {
   $row[] = $user;
@@ -43,6 +43,7 @@ if (isset($_POST["updateSyarat"])) {
       <table id="table_id" class="table table-striped table-hover">
         <thead>
           <tr>
+            <th scope="col">Nama</th>
             <th scope="col">Nim</th>
             <th scope="col">Ukt</th>
             <th scope="col">Pembimbing</th>
@@ -58,6 +59,7 @@ if (isset($_POST["updateSyarat"])) {
           foreach ($row as $rows) :
           ?>
             <tr>
+              <td><?= $rows["nama"]; ?></td>
               <td><?= $rows["nim"]; ?></td>
               <td><img src="Source/img/<?= $rows["ukt"]; ?>" alt="" width="70"></td>
               <td><img src="Source/img/<?= $rows["pembimbing"]; ?>" alt="" width="70"></td>

@@ -30,6 +30,7 @@ while ($user =  mysqli_fetch_assoc($query)) {
                 </div>
                 <div class="form-floating mb-3 col-md-6">
                   <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                  <input type="hidden" name="status" class="for1m-control" id="floatingInput" placeholder="name@example.com">
                   <label class="ms-2" for="floatingInput">username</label>
                   <div class="invalid-feedback">
                     Username belum Di masukkan
@@ -72,6 +73,7 @@ while ($user =  mysqli_fetch_assoc($query)) {
             <th scope="col">Nim</th>
             <th scope="col">Username</th>
             <th scope="col">Level</th>
+            <th scope="col">Status</th>
             <th scope="col">Aksi</th>
           </tr>
         </thead>
@@ -85,6 +87,13 @@ while ($user =  mysqli_fetch_assoc($query)) {
               <td><?= $rows["nim"]; ?></td>
               <td><?= $rows["username"]; ?></td>
               <td><?= $rows["level"]; ?></td>
+              <td>
+                <?php if ($rows["status"] == 1) : ?>
+                  <p class="alert alert-success p-0 m-0 text-center">Setuju</p>
+                <?php else : ?>
+                  <p class="alert alert-danger p-0 m-0 text-center">Belum</p>
+                <?php endif ?>
+              </td>
               <td class="d-flex">
                 <!-- Modal Edit User -->
                 <button class="me-1 btn btn-warning" data-bs-toggle="modal" data-bs-target="#editData<?= $rows['id']; ?>">
@@ -97,7 +106,7 @@ while ($user =  mysqli_fetch_assoc($query)) {
                   <div class="modal-dialog modal-lg modal-fullscreen-md-down">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -111,18 +120,34 @@ while ($user =  mysqli_fetch_assoc($query)) {
                                 Username belum Di masukkan
                               </div>
                             </div>
+                            <div class="form-floating mb-3 col-md-6">
+                              <select class="form-select" id="mySelect" name="status" required>
+                                <?php
+                                $data = array("Setuju", "Belum");
+                                foreach ($data as $key => $value) {
+                                  if ($rows["status"] == $key + 1) : ?>
+                                    <option selected value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php else : ?>
+                                    <option value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php endif ?>
+                                <?php } ?>
+                              </select>
+                              <div class="invalid-feedback">
+                                Level belum Di masukkan
+                              </div>
+                            </div>
                             <div class="form-floating mb-3 col-md-12">
                               <select class="form-select" id="mySelect" name="level" required>
                                 <?php
                                 $data = array("admin", "petugas", "mahasiswa");
-                                foreach ($data as $key => $value) {
-                                  if ($rows["level"] == $key + 1) {
-                                    echo "<option selected value='$key'>$value</option>";
-                                  } else {
-                                    echo "<option value='$key'>$value</option>";
-                                  }
-                                }
-                                ?>
+                                foreach ($data as $key => $value) { ?>
+                                  <?php if ($rows["level"] == $key + 1) { ?>
+                                    <option selected value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php  } else { ?>
+                                    <option value='<?= $key + 1; ?>'><?= $value; ?></option>
+                                  <?php  } ?>
+                                <?php } ?>
+
                               </select>
                               <div class="invalid-feedback">
                                 Level belum Di masukkan

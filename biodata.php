@@ -10,8 +10,22 @@ $user =  mysqli_fetch_assoc($query);
 
 <div class="container rounded bg-white mb-5">
   <div class="row">
+    <?php if ($_SESSION["status"] == 2) : ?>
+      <div class="alert alert-warning py-1" role="alert">
+        Akun anda belum di verifikasi harap tunggu <br> admin memverifikasinya.
+      </div>
+    <?php endif ?>
     <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><?= $user["nama"]; ?></span><span class="text-black-50"><?= $user["nim"]; ?></span><span> </span></div>
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <?php if ($user["foto"] == null) : ?>
+          <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <?php else : ?>
+          <div class="d-flex justify-content-center ini">
+            <img style="border-radius: 100%;" src="Source/img/biodata/<?= $user["foto"]; ?>" width="170" height="170">
+          </div>
+        <?php endif ?>
+        <span class="font-weight-bold"><?= $user["nama"]; ?></span><span class="text-black-50"><?= $user["nim"]; ?></span><span> </span>
+      </div>
     </div>
     <div class="col-md-9 border-right">
       <div class="p-3 py-5">

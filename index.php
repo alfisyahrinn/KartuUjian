@@ -41,23 +41,25 @@ if (isset($_GET["halaman"]) && $_GET["halaman"] == "home") {
     include 'main.php';
   }
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "editBiodata") {
-  if ($_SESSION["level"] == 3) {
+  if ($_SESSION["level"] == 3 && $_SESSION["status"] == 1) {
     $page = "editBiodata.php";
     include 'main.php';
   } else {
-    $page = "home.php";
+    $page = "biodata.php";
     include 'main.php';
   }
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "cetakKartu") {
-  if ($_SESSION["level"] == 3) {
+  if ($_SESSION["level"] == 3 && $_SESSION["status"] == 1) {
     $page = "cetakKartu.php";
     include 'main.php';
   } else {
-    $page = "home.php";
+    $page = "biodata.php";
     include 'main.php';
   }
 } elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "login") {
   include 'login.php';
+} elseif (isset($_GET["halaman"]) && $_GET["halaman"] == "kartuUjian") {
+  include 'kartuUjian.php';
 } else {
   include 'main.php';
 }

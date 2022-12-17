@@ -1,0 +1,68 @@
+<html>
+  <head>
+   <title>jQuery Validation</title>
+   <script src="jquery.js"></script>
+   <script src="jquery.shortcuts.min.js"></script>
+ 
+   <script>
+   $.Shortcuts.add({
+    type: 'down',
+    mask: 'P',
+    handler: function() {
+        window.print();
+    }
+   }).start();
+   </script>
+ 
+   <script>
+   $.Shortcuts.add({
+    type: 'down',
+    mask: 'CTRL+G',
+    handler: function() {
+        window.open('http://www.google.com', '_self');
+    }
+    }).start();
+   </script>
+ 
+   <script>
+   $.Shortcuts.add({
+    type: 'down',
+    mask: 'ALT+R',
+    handler: function() {
+        window.open('https://blog.rosihanari.net', '_blank');
+    }
+   }).start();
+   </script>
+    
+   <script>
+   $.Shortcuts.add({
+    type: 'down',
+    mask: 'F8',
+    handler: function() {
+        document.getElementById('title').innerHTML="Hallo";
+    }
+   }).start();
+   </script>
+    
+   <script>
+   $.Shortcuts.add({
+    type: 'down',
+    mask: 'F9',
+    handler: function() {
+        document.getElementById('title').innerHTML="Contoh Shortcut Action";
+    }
+   }).start();
+   </script>
+    
+  </head>
+  <body>
+    <h1 id="title">Contoh Shortcut Action</h1>
+    <ol>
+       <li>Cetak Halaman (P)</li>
+       <li>Buka Situs Google (CTRL+G)</li>
+       <li>Buka Situs Blog.RosihanAri.Net di window baru (ALT+R)</li>
+       <li>Ubah title menjadi 'Hallo' (F8)</li>
+       <li>Ubah title menjadi 'Contoh Shortcut Action' (F9)</li>
+    </ol>
+  </body>
+</html>

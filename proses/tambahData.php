@@ -26,8 +26,8 @@ if (isset($_POST["tambahData"])) {
   //insert ke persyaratan
   mysqli_query($koneksi, "INSERT INTO persyaratan (nim) VALUES ('$nim')");
   // insert ke user
-  $result = mysqli_query($koneksi, "INSERT INTO user (nim,username,level) VALUES
-                                  ('$nim','$username',$level)");
+  $result = mysqli_query($koneksi, "INSERT INTO user (nim,username,level,status) VALUES
+                                  ('$nim','$username',$level,'1')");
   if ($result) {
     echo "
     <script>
